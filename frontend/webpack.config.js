@@ -2,10 +2,10 @@ const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    entry: "./src/index.js",
+    entry: "./frontend/src/index.js",
     output: {
-        path: path.join(__dirname, "/dist"),
-        filename: "bundle.js"
+        path: path.resolve(__dirname, "static/frontend/js"),
+        filename: pathdata => (pathdata.chunk.name + '.js')
     },
     resolve: {
         extensions: [".js", ".jsx", ".json"]
@@ -32,7 +32,12 @@ module.exports = {
     ],
     devServer: {
         historyApiFallback: true,
-
-        hot: true
+        hot: true,
+        devMiddleware: {
+          index:            true,
+          writeToDisk:      true,
+          publicPath:       '/static/frontend/js/',
+          serverSideRender: true,
+        }
     }
 }
