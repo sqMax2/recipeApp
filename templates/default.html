@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>RecipeApp</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+</html>
+{% load render_bundle from webpack_loader %}
+{% render_bundle 'main' %}

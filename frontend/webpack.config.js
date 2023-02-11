@@ -1,11 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const BundleTracker = require("webpack-bundle-tracker");
 
 module.exports = {
-    entry: "./frontend/src/index.js",
+    entry: "./src/index.js",
     output: {
-        path: path.resolve(__dirname, "static/frontend/js"),
-        filename: pathdata => (pathdata.chunk.name + '.js')
+        path: path.resolve(__dirname, "../static/frontend/js"),
+        filename: pathdata => (pathdata.chunk.name + '.js'),
+        publicPath: '/static/'
     },
     resolve: {
         extensions: [".js", ".jsx", ".json"]
@@ -28,7 +30,8 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: "./src/index.html"
-        })
+        }),
+        new BundleTracker({filename: '../static/frontend/webpack-stats.json'})
     ],
     devServer: {
         historyApiFallback: true,
@@ -36,7 +39,7 @@ module.exports = {
         devMiddleware: {
           index:            true,
           writeToDisk:      true,
-          publicPath:       '/static/frontend/js/',
+
           serverSideRender: true,
         }
     }
