@@ -17,15 +17,19 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from rest_framework import routers
+from recipe.views import CategoryViewset, RecipeViewset
+from rest_framework.schemas import get_schema_view
 
 
 # REST
-from rest_framework import routers
-
 router = routers.DefaultRouter()
+router.register(r'category', CategoryViewset)
+router.register(r'recipe', RecipeViewset)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('api/', include(router.urls, namespace='api')),
+    path('api/', include(router.urls)),
+    path('openapi', get_schema_view(title='Recipe App', description='API for recipe app'), name='openapi-schema'),
     path('', include('recipe.urls', namespace='recipe')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

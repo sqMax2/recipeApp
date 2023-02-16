@@ -1,6 +1,6 @@
 from django.urls import path
 
-from recipe.views import AppView
+from .views import AppView
 
 app_name = 'recipe'
 urlpatterns = [
