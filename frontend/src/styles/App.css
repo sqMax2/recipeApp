@@ -1,0 +1,71 @@
+body {
+    min-width: 600px;
+}
+.app > .wrapper {
+    font-size: 12pt;
+    display: grid;
+    min-height: 100vh;
+    gap: 0px;
+    grid-template-columns: minmax(200px, 1fr) minmax(400px, 5fr);
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "header header"
+        "nav    main"
+        "footer footer";
+
+}
+
+nav {
+    grid-area: nav;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+}
+nav ul {
+    list-style-type: none;
+    margin: 10px;
+    padding: 0;
+    height: 100%;
+    position: fixed;
+    overflow: auto;
+    top: 5rem;
+    min-width: 150px;
+    width: 15vw;
+}
+nav li {
+    text-align: center;
+}
+nav li a {
+    margin: 2px;
+    padding: 5px;
+    border: 1px yellowgreen solid ;
+    border-radius: 10px;
+    background: #bfe379;
+    display: block;
+    text-decoration: none;
+    color: #363636;
+}
+nav li a:hover {
+    color: white;
+    background: yellowgreen;
+}
+nav li .active {
+    color: white;
+    background: olivedrab;
+}
+
+main {
+    grid-area: main;
+    padding: 5px;
+
+}
+
+footer {
+    color: darkgrey;
+    grid-area: footer;
+    font-size: 8pt;
+    min-height: 2em;
+    padding: 5px;
+    text-align: center;
+}

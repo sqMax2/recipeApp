@@ -1,0 +1,15 @@
+header {
+    grid-area: header;
+    color: white;
+    background: olivedrab;
+    font-size: 3rem;
+    height: 80px;
+    display: inline-flex;
+    justify-content: center;
+    /*align-items: center;*/
+    position: sticky;
+    top: 0;
+    z-index: 999;
+
+
+}
