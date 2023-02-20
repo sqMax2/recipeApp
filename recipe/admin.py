@@ -10,7 +10,7 @@ from recipe.models import Category, Recipe
 
 # Register your models here.
 class CategoryAdmin(ModelAdmin):
-    list_display = ['name', 'recipe_count']
+    list_display = ['name', 'recipes_count']
 
 
 class PickledFieldWidget(widgets.AdminTextareaWidget):

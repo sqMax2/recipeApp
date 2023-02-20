@@ -6,7 +6,9 @@ import "swagger-ui-react/swagger-ui.css"
 import Header from "./Header";
 import "../styles/App.css";
 import HomePage from "./HomePage";
+import Categories from "./Categories";
 import Category from "./Category";
+import Recipe from "./Recipe";
 
 
 function App() {
@@ -29,7 +31,11 @@ function App() {
                 </nav>
                 <main>
                     <Routes>
-                        <Route path={'recipe'} element={<Category />} />
+                        <Route path={'recipe'} element={<Categories />}>
+                            <Route path={':cat'} element={<Category />}>
+                                <Route path={':recipe'} element={<Recipe />} />
+                            </Route>
+                        </Route>
                         <Route path={'api-doc'} element={<SwaggerUI url="openapi" />} />
                         <Route path={'/'} element={<HomePage />} />
                     </Routes>

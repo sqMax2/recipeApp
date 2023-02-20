@@ -1,49 +1,60 @@
 import * as React from "react";
-import {NavLink, Route} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import axios from "axios";
 import "../styles/Category.css";
-import {Outlet, Routes} from "react-router";
+import {Outlet} from "react-router";
+import Categories from "./Categories";
+import withRouter from "./withRouter";
 
-class Category extends React.Component{
-    constructor(props) {
+class Category extends React.Component {
+        constructor(props) {
         super(props);
     }
 
     state ={
-        categories: [],
-        category: ''
+        recipes: [],
+    }
+
+    getData() {
+        this.category = this.props.router.params.cat;
+        const category = this.category;
+        axios.get(`/api/category/${category}/`)
+            .then(res => {
+                const recipes = res.data.recipes;
+                this.setState({recipes: recipes});
+            })
     }
 
     componentDidMount() {
-        axios.get('api/category/')
-            .then(res => {
-                const categories = res.data.results;
-                console.log(categories)
-                this.setState({categories: categories})
-            })
+        this.getData();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.router.params.cat !== this.category){
+            this.getData();
+        }
     }
 
     render() {
         return (
-        <div>
-            <Routes>
-                <Route path={'/'} element={<div><div className={'categories-list'}>
-                    {this.state.categories.map(category => {
-                    return (
-                        <NavLink key={category.pk} activeClassName={'is-category'} to={category.name}>{category.name} ({category.recipe_count})</NavLink>
-                    )})}
-            </div>
-            <div>
-                {!this.state.category ? <h2>Please, select category</h2> : <h2>this.state.category</h2>}
-            </div><Outlet /></div>}>
-                    <Route path={'/:name'} element={<div>recipe is: some name</div>}/>
-                </Route>
-            </Routes>
+            <>
+                {this.props.router.params.recipe?'':<><div>Recipes are:</div>
+                <div className={'recipes-list'}>
+                    <ul>
+                        {this.state.recipes.map(recipe => {
+                            return (
+                                <li key={recipe.pk}>
+                                    <NavLink activeClassName={'is-active'} to={recipe.title}><img src={recipe.image}
+                                                width={'150px'}/> {recipe.title}</NavLink>
+                                </li>
+                            )})}
 
-
-        </div>
-    );
+                    </ul>
+                </div></>}
+                <Outlet />
+            </>
+        );
     }
 }
 
-export default Category;
+export default withRouter(Category);

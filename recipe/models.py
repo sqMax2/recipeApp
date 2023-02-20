@@ -10,7 +10,7 @@ class Category(models.Model):
         # Return a string that represents the instance
         return f"{self.name}"
 
-    def recipe_count(self):
+    def recipes_count(self):
         return self.recipes.count()
 
     class Meta:

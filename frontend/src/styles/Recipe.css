@@ -1,0 +1,32 @@
+.recipe {
+    max-width: 1200px;
+    width: 90%;
+    display: grid;
+    grid-template-columns: minmax(300px, 1fr) minmax(600px, 3fr);
+    grid-template-areas:
+        "title  title"
+        "ingredients text"
+        "ingredients text"
+}
+
+.title {
+    grid-area: title;
+}
+
+.ingredients {
+    grid-area: ingredients;
+    padding-right: 10px;
+}
+.ingredients tr td {
+    padding-bottom: 0.5em;
+}
+
+.text {
+    grid-area: text;
+
+}
+.text img {
+    max-width: 500px;
+    float: left;
+    margin: 0 20px 20px 0;
+}
